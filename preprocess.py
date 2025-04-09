@@ -61,7 +61,7 @@ dfX = combats.drop('First_wins', axis=1)
 dfY = combats['First_wins']
 
 #save as csv
-dfX.to_csv('X_processed.csv', index=False)
+dfX.to_csv('x_processed.csv', index=False)
 dfY.to_csv('y_processed.csv', index=False)
 
 #save here
