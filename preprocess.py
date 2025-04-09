@@ -49,20 +49,24 @@ combats = combats.merge(pokemon, left_on='First_pokemon', right_index = True, su
 combats = combats.merge(pokemon, left_on='Second_pokemon', right_index = True, suffixes=('', '_second'))
 
 #1 if first pokemon wins, 0 otherwise
-combats['First_wins'] = (combats['Winner'] == combats['First_pokemon']).astype(int)
+combats['First_wins'] = (combats['Winner'] == combats['First_pokemon'])
 
 #drop id columns
 columns_to_drop = ['First_pokemon', 'Second_pokemon', 'Winner', '#']
 columns_to_drop += [col for col in combats.columns if 'Name' in col]
 combats.drop(columns=columns_to_drop, inplace=True, errors='ignore')
 
+#convert all boolean columns to binary
+boolcols = combats.select_dtypes(include=['bool']).columns
+combats[boolcols] = combats[boolcols].astype(int)
+
 #create x and y datasets
 dfX = combats.drop('First_wins', axis=1)
 dfY = combats['First_wins']
 
 #save as csv
-dfX.to_csv('x_processed.csv', index=False)
-dfY.to_csv('y_processed.csv', index=False)
+dfX.to_csv('processed_x.csv', index=False)
+dfY.to_csv('processed_y.csv', index=False)
 
 #save here
 #df.to_csv('pokemon_data_encoded.csv', index=False)

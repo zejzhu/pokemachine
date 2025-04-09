@@ -4,8 +4,8 @@ from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler 
 
 #Load csv files, flatten y to 1D array
-x = pd.read_csv('x_processed.csv')
-y = pd.read_csv('y_processed.csv').values.ravel()
+x = pd.read_csv('processed_x.csv')
+y = pd.read_csv('processed_y.csv').values.ravel()
 
 
 #scale features
