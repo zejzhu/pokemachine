@@ -10,7 +10,7 @@ df_pokemon = pd.read_csv('pokemon_data_encoded.csv')
 #Set index for merging
 df_pokemon.set_index('#', inplace=True)
 
-#Merge stats for both Pokémon
+#Merge stats for both Pokémon with combat outcomes
 df = df_battles.copy()
 df = df.merge(df_pokemon, left_on='First_pokemon', right_index=True, suffixes=('_first', ''))
 df = df.merge(df_pokemon, left_on='Second_pokemon', right_index=True, suffixes=('', '_second'))
@@ -35,7 +35,7 @@ X_scaled = scaler.fit_transform(X)  # Scaling all data at once
 model = LogisticRegression(max_iter=1000)
 model.fit(X_scaled, y)
 
-#eval
+#predict
 y_pred = model.predict(X_scaled)
 
 #get accuracy 
