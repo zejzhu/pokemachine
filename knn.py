@@ -1,12 +1,12 @@
+import os #knn attempts to do parallel processing
+os.environ['LOKY_MAX_CPU_COUNT'] = '2'
+
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import MinMaxScaler
 
-#TODO: make preprocess steps into a function to be used by evaluator
-#OR make each model able to return its own evaluations (inefficient but functional)
 
 #load csv files, flatten y to 1d arr
 x = pd.read_csv('processed_x.csv')
@@ -20,14 +20,8 @@ scaler = StandardScaler()
 xtrain = scaler.fit_transform(xtrain)
 xtest = scaler.transform(xtest)
 
-#minmax 0-1
-minmax = MinMaxScaler
-minmax.fit(xtrain)
-xtrain = minmax.transform(xtrain)
-xtest = minmax.transform(xtest)
-
 #train and predict
-knn = KNeighborsClassifier()
+knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(xtrain, ytrain)
 
 train_ypred = knn.predict(xtrain)
