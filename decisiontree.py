@@ -1,8 +1,8 @@
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, roc_auc_score
 
 
 #load csv files, flatten y to 1d arr
@@ -30,3 +30,6 @@ testacc = accuracy_score(test_ypred, ytest)
 
 print(f"Training Accuracy: {trainacc:.4f}")
 print(f"Test Accuracy: {testacc:.4f}")
+
+auc_score = roc_auc_score(ytest, test_ypred)
+print(f"AUC-ROC score: {auc_score:.4f}")

@@ -1,4 +1,11 @@
 '''
+OVERVIEW:
+Combines the evaluation of all these methods
+
+'''
+
+
+'''
 K-Nearest Neighbors Evaluator
 '''
 
